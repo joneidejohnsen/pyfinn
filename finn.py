@@ -73,6 +73,7 @@ def scrape_ad(finnkode):
     ad_data = {
         'Postadresse': postal_address_element.text,
         'url': url,
+        'Tittel': title
     }
 
     viewings = _scrape_viewings(html)
