@@ -66,6 +66,9 @@ def scrape_ad(finnkode):
 
     html = r.html
 
+    area_element = html.find('span.u-t3.u-display-block', first=True)
+    title_element = html.find('h1.u-t2', first=True)
+
     postal_address_element = html.find('h1 + p', first=True)
     if not postal_address_element:
         return
@@ -73,8 +76,8 @@ def scrape_ad(finnkode):
     ad_data = {
         'Postadresse': postal_address_element.text,
         'url': url,
-        'Område': html.find('span.u-t3.u-display-block', first=True).text,
-        'Tittel': html.find('h1.u-t2', first=True).text
+        'Område': area_element.text if area_element else '',
+        'Tittel': title_element.text if title_element else ''
     }
 
     viewings = _scrape_viewings(html)
